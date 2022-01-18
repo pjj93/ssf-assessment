@@ -75,7 +75,11 @@ public class BookService {
     }
 
     public Book getBook(String works_id) {
-        
+        // Optional<String> opt = bookRepo.get(works_id);
+        // if (opt.isPresent()){
+        //     //TODO: implement and return book
+        // }
+
         String url = UriComponentsBuilder
         .fromUriString(URL_BOOK + "/" + works_id + ".json")
         .toUriString();

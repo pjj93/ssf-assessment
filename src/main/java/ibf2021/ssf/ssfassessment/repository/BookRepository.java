@@ -17,8 +17,8 @@ public class BookRepository {
     @Qualifier(BEAN_BOOK_CACHE)
     private RedisTemplate<String, String> template;
 
-    public void cache(String key, String value) {
-        template.opsForValue().set(key, value, 10, TimeUnit.MINUTES);
+    public void cache(String key, String book) {
+        template.opsForValue().set(key, book, 10, TimeUnit.MINUTES);
     }
 
     public Optional<String> get(String key) {
