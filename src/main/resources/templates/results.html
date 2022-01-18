@@ -9,14 +9,16 @@
 </head>
 <body>
     <div class="container">
-        <div class="row mt-3">
-            <h2>Search result for '<span th:text="${results}"></span><span>'</span></h2>
+        <div class="row mt-3 mb-2">
+            <h2>Search result for '<span th:text="${query}"></span><span>'</span></h2>
         </div>
-        <div class="row mt-3">
+<!--         <div class="row mt-3">
             <a th:href="@{/book/{works_id}(works_id=${results})}"><span th:text="${results}"></a>
-            <!-- TODO: replace works_id with the key attribute returned from search -->
+        </div> -->
+        <div class="row mt-3" th:each="result: ${results}">
+            <a th:href="@{/book/{works_id}(works_id=${result.getId})}"><span th:text="${result.getTitle}"></a>     
         </div>
-        <a href="/" class="btn btn-warning">Back</a>
+        <a href="/" class="btn btn-warning mt-5 mb-5">Back</a>
     </div>
 </body>
 </html>

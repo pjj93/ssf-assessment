@@ -22,8 +22,8 @@ public class BookController {
     @GetMapping
     public String searchBook(@RequestParam String query, Model model) {
         List<Book> bookList = bookSvc.search(query.toLowerCase().trim().replace(" ", "+"));
-        model.addAttribute("results", query.toLowerCase().trim());
-
-        return "search";
+        model.addAttribute("query", query.toLowerCase().trim());
+        model.addAttribute("results", bookList);
+        return "results";
     }
 }
