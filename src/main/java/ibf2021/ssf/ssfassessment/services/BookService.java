@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ibf2021.ssf.ssfassessment.SsfAssessmentApplication;
-import ibf2021.ssf.ssfassessment.model.Book;
+import ibf2021.ssf.ssfassessment.models.Result;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
@@ -27,7 +27,7 @@ import jakarta.json.JsonValue;
 public class BookService {
     private Logger logger = Logger.getLogger(SsfAssessmentApplication.class.getName());
 
-    public List<Book> search (String searchTerm) {
+    public List<Result> search (String searchTerm) {
         // logger.log(Level.INFO, "Search query >>> " + searchTerm);
         
         String url = UriComponentsBuilder
@@ -52,14 +52,14 @@ public class BookService {
             final JsonReader reader = Json.createReader(is);
             final JsonObject body = reader.readObject();
             final JsonArray docs = body.getJsonArray("docs");
-            List<Book> bookList = new ArrayList<>();
+            List<Result> resultList = new ArrayList<>();
             for(JsonValue v: docs) {
                 JsonObject o = (JsonObject)v;
-                Book book = new Book(o);
-                bookList.add(book);
+                Result result = new Result(o);
+                resultList.add(result);
             }
  
-            return bookList;
+            return resultList;
 
         } catch (Exception ex) { }
 

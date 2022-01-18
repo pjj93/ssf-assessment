@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ibf2021.ssf.ssfassessment.model.Book;
+import ibf2021.ssf.ssfassessment.models.Result;
 import ibf2021.ssf.ssfassessment.services.BookService;
 
 @Controller
@@ -21,7 +21,7 @@ public class BookController {
 
     @GetMapping
     public String searchBook(@RequestParam String query, Model model) {
-        List<Book> bookList = bookSvc.search(query.toLowerCase().trim().replace(" ", "+"));
+        List<Result> bookList = bookSvc.search(query.toLowerCase().trim().replace(" ", "+"));
         model.addAttribute("query", query.toLowerCase().trim());
         model.addAttribute("results", bookList);
         return "results";
