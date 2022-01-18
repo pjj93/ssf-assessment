@@ -12,11 +12,13 @@
         <div class="row mt-3 mb-2">
             <h2>Search result for '<span th:text="${query}"></span><span>'</span></h2>
         </div>
-<!--         <div class="row mt-3">
-            <a th:href="@{/book/{works_id}(works_id=${results})}"><span th:text="${results}"></a>
-        </div> -->
-        <div class="row mt-3" th:each="result: ${results}">
-            <a th:href="@{/book/{works_id}(works_id=${result.getId})}"><span th:text="${result.getTitle}"></a>     
+        <div th:if="${not #lists.isEmpty(results)}">
+            <div class="row mt-3" th:each="result: ${results}">
+                <a th:href="@{/book/{works_id}(works_id=${result.getId})}"><span th:text="${result.getTitle}"></a>     
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(results)}">
+            <p>No results found</p>
         </div>
         <a href="/" class="btn btn-warning mt-5 mb-5">Back</a>
     </div>
