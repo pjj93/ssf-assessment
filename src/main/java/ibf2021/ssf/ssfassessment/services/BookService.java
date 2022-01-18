@@ -114,7 +114,7 @@ public class BookService {
                     book.setDescription(description);
                 // }
             } else {
-                book.setDescription("<No Description available>");
+                book.setDescription("<No Description Available>");
             }
             if (body.containsKey("excerpts")) {
                 final JsonArray excerpts = body.getJsonArray("excerpts");
