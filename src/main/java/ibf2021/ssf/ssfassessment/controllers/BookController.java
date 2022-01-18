@@ -20,6 +20,7 @@ public class BookController {
     @GetMapping(path="/{works_id}")
     public String searchBook(@PathVariable String works_id, Model model) {
         Book book = bookSvc.getBook(works_id);
+        model.addAttribute("book", book);
         return "book";
     }
 }

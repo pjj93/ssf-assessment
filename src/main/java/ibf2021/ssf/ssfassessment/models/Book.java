@@ -1,15 +1,21 @@
 package ibf2021.ssf.ssfassessment.models;
 
-import jakarta.json.JsonObject;
-
 public class Book {
     private String title;
     private String description;
-    private String exerpt;
+    private String excerpt;
     private Boolean isCached;
 
-    public Book(JsonObject o) {
-        this.title = o.getString("title");
+    public Book() {
+        this.title = null;
+        this.description = null;
+        this.excerpt = null;
+        this.isCached = false;
+    }
+
+    public Book(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public Boolean getIsCached() {
@@ -20,12 +26,12 @@ public class Book {
         this.isCached = isCached;
     }
 
-    public String getExerpt() {
-        return exerpt;
+    public String getExcerpt() {
+        return excerpt;
     }
 
-    public void setExerpt(String exerpt) {
-        this.exerpt = exerpt;
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
     }
 
     public String getDescription() {
@@ -35,8 +41,6 @@ public class Book {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Book() {}
 
     public String getTitle() {
         return title;

@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.http.MediaType;
@@ -86,7 +87,38 @@ public class BookService {
         ResponseEntity<String> resp = template.exchange(req, String.class);
 
         // logger.log(Level.INFO, "Status code: " + resp.getStatusCodeValue());
-        // logger.log(Level.INFO, "Book: " + resp.getBody());
+        logger.log(Level.INFO, "Book: " + resp.getBody());
+
+        Book book = new Book();
+
+        try (InputStream is = new ByteArrayInputStream(resp.getBody().getBytes())) {
+            final JsonReader reader = Json.createReader(is);
+            final JsonObject body = reader.readObject();
+            final String title = body.getString("title");
+            logger.log(Level.INFO, "Title: " + title);
+            book.setTitle(title);
+            //final String description;
+            if (body.containsKey("description")) {
+                final String description = body.getString("description");
+                logger.log(Level.INFO, "Description: " + description);
+                book.setDescription(description);
+            } else {
+                book.setDescription("<No Description available>");
+            }
+            if (body.containsKey("excerpts")) {
+                final JsonArray excerpts = body.getJsonArray("excerpts");
+                final String firstExcerpt = excerpts.getJsonObject(0).getString("excerpt");
+                book.setExcerpt(firstExcerpt);
+            } else {
+                book.setExcerpt("<No Excerpt Available>");
+            }
+
+            return book;
+
+        } catch (Exception ex) { 
+            ex.printStackTrace();
+        }
+
         return null;
     }
 }
