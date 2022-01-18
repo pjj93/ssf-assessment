@@ -5,9 +5,12 @@ import jakarta.json.JsonObject;
 public class Book {
     private String id;
     private String title;
+    private String cover;
 
     public Book(JsonObject o) {
-
+        this.id = o.getString("key").replace("/works/", "");
+        this.title = o.getString("title");
+        this.cover = "https://covers.openlibrary.org/b/id/" + o.getJsonNumber("cover_i") + ".jpg";
     }
 
     public Book() {}
@@ -24,5 +27,13 @@ public class Book {
     public void setId(String id) {
         this.id = id;
     }
-    
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
 }
