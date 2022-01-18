@@ -98,10 +98,14 @@ public class BookService {
             logger.log(Level.INFO, "Title: " + title);
             book.setTitle(title);
             //final String description;
+            
             if (body.containsKey("description")) {
-                final String description = body.getString("description");
-                logger.log(Level.INFO, "Description: " + description);
-                book.setDescription(description);
+                // Object obj = body.get("description");
+                // if (obj instanceof String){
+                    final String description = body.getString("description");
+                    logger.log(Level.INFO, "Description: " + description);
+                    book.setDescription(description);
+                // }
             } else {
                 book.setDescription("<No Description available>");
             }

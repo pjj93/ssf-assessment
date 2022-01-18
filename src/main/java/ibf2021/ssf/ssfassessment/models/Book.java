@@ -4,13 +4,13 @@ public class Book {
     private String title;
     private String description;
     private String excerpt;
-    private Boolean isCached;
+    private String cached;
 
     public Book() {
         this.title = null;
         this.description = null;
         this.excerpt = null;
-        this.isCached = false;
+        this.cached = "false";
     }
 
     public Book(String title, String description) {
@@ -18,12 +18,12 @@ public class Book {
         this.description = description;
     }
 
-    public Boolean getIsCached() {
-        return isCached;
+    public String getCached() {
+        return cached;
     }
 
-    public void setIsCached(Boolean isCached) {
-        this.isCached = isCached;
+    public void setCached(String cached) {
+        this.cached = cached;
     }
 
     public String getExcerpt() {
