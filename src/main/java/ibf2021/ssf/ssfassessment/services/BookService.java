@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import ibf2021.ssf.ssfassessment.SsfAssessmentApplication;
 import ibf2021.ssf.ssfassessment.models.Book;
 import ibf2021.ssf.ssfassessment.models.Result;
+import ibf2021.ssf.ssfassessment.repository.BookRepository;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
@@ -29,6 +31,9 @@ import jakarta.json.JsonValue;
 @Service
 public class BookService {
     private Logger logger = Logger.getLogger(SsfAssessmentApplication.class.getName());
+
+    @Autowired
+    private BookRepository bookRepo;
 
     public List<Result> search (String searchTerm) {
         // logger.log(Level.INFO, "Search query >>> " + searchTerm);
@@ -95,7 +100,6 @@ public class BookService {
             final JsonReader reader = Json.createReader(is);
             final JsonObject body = reader.readObject();
             final String title = body.getString("title");
-            logger.log(Level.INFO, "Title: " + title);
             book.setTitle(title);
             //final String description;
             
@@ -103,7 +107,6 @@ public class BookService {
                 // Object obj = body.get("description");
                 // if (obj instanceof String){
                     final String description = body.getString("description");
-                    logger.log(Level.INFO, "Description: " + description);
                     book.setDescription(description);
                 // }
             } else {
