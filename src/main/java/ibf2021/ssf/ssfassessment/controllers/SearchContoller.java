@@ -20,9 +20,9 @@ public class SearchContoller {
 
     @GetMapping
     public String searchBook(@RequestParam String query, Model model) {
-        List<Result> bookList = bookSvc.search(query.toLowerCase().trim().replace(" ", "+"));
+        List<Result> resultList = bookSvc.search(query.toLowerCase().trim().replace(" ", "+"));
         model.addAttribute("query", query.toLowerCase().trim());
-        model.addAttribute("results", bookList);
+        model.addAttribute("results", resultList);
         return "results";
     }
 }

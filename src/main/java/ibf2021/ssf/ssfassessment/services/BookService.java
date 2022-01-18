@@ -1,5 +1,6 @@
 package ibf2021.ssf.ssfassessment.services;
 
+import static ibf2021.ssf.ssfassessment.Constants.URL_BOOK;
 import static ibf2021.ssf.ssfassessment.Constants.URL_SEARCH;
 
 import java.io.ByteArrayInputStream;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ibf2021.ssf.ssfassessment.SsfAssessmentApplication;
+import ibf2021.ssf.ssfassessment.models.Book;
 import ibf2021.ssf.ssfassessment.models.Result;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -64,5 +66,27 @@ public class BookService {
         } catch (Exception ex) { }
 
         return Collections.EMPTY_LIST;
+    }
+
+    public Book getBook(String works_id) {
+        
+        String url = UriComponentsBuilder
+        .fromUriString(URL_BOOK + "/" + works_id + ".json")
+        .toUriString();
+
+        // logger.log(Level.INFO, "url: " + url);
+
+        RequestEntity<Void> req = RequestEntity
+        .get(url)
+        .accept(MediaType.APPLICATION_JSON)
+        .build();
+
+        RestTemplate template = new RestTemplate();
+
+        ResponseEntity<String> resp = template.exchange(req, String.class);
+
+        // logger.log(Level.INFO, "Status code: " + resp.getStatusCodeValue());
+        // logger.log(Level.INFO, "Book: " + resp.getBody());
+        return null;
     }
 }
