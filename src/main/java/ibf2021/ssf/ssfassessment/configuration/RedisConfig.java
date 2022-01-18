@@ -3,7 +3,6 @@ package ibf2021.ssf.ssfassessment.configuration;
 import static ibf2021.ssf.ssfassessment.Constants.BEAN_BOOK_CACHE;
 import static ibf2021.ssf.ssfassessment.Constants.ENV_REDIS_PASSWORD;
 
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +25,7 @@ public class RedisConfig {
         private String redisHost;
 
         @Value("${spring.redis.port}") 
-        private Optional<Integer> redisPort;
+        private Integer redisPort;
 
         @Value("${spring.redis.database}")
         private int redisDatabase; 
@@ -37,11 +36,9 @@ public class RedisConfig {
                 final RedisStandaloneConfiguration config 
                         = new RedisStandaloneConfiguration();
                 logger.log(Level.INFO, "redis host: " + redisHost + " redis port: " + redisPort);
-                // logger.info("redis host port> " + 
-                //         redisHost + ' ' + redisPort.get() + ' ' + redisPassword);
                  
                 config.setHostName(redisHost);
-                config.setPort(redisPort.get());
+                config.setPort(redisPort);
                 config.setDatabase(redisDatabase);
                 
                 final String redisPassword = System.getenv(ENV_REDIS_PASSWORD);
